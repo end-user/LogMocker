@@ -2,14 +2,14 @@ package com.example;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Oblio.Leitch on 12/18/2015.
  */
-@RestController
+@Controller
 public class LogController {
     private final Logger LOGGER = LoggerFactory.getLogger(LogController.class);
 
@@ -20,10 +20,10 @@ public class LogController {
         return "index";
     }
 
-
     @RequestMapping("/showerror")
-    public String makeError() {
+    public String makeError(Model model) {
         LOGGER.error("Wrote an Error!");
-        return "Whoops!";
+        model.addAttribute("message", "Whoops!");
+        return "index";
     }
 }
